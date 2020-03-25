@@ -10,22 +10,31 @@ def main():
     audio_clips = os.listdir(audio_fpath)
 
     for i in range(len(audio_clips)):
-        spectrogram(audio_fpath + audio_clips[i], i)
+        x, sr = librosa.load(audio_fpath + audio_clips[i], sr=44100)
+        # loads an audio file as a floating point time series. sr is the target sampling rate
 
-def spectrogram(finalPath, i):
-    x, sr = librosa.load(finalPath, sr=44100)
+        duration = int(librosa.get_duration(x, sr))
+        for j in range(duration):
+            spectrogram(audio_fpath + audio_clips[i], j, j, j+2)
+
+def spectrogram(finalPath, filename, start, stop):
+
+    x, sr = librosa.load(finalPath, offset=start, duration=stop, sr=44100)
     
-    X = librosa.stft(x)
-    Xdb = librosa.amplitude_to_db(abs(X))
-    plt.figure(figsize=(14, 5))
-    librosa.display.specshow(Xdb, sr=sr, x_axis='time', y_axis='hz')
-    plt.colorbar()
+    X = librosa.stft(x) # short-time fourier transform
+    # STFT represents a signal in time-frequency domain by computing
+    # discrete Fourier transforms (DFT) over short overlapping windows
+    # this function returns a complex-valued matrix D such that:
+    # abs(D[f,t]) = the magnitude of frequency bin f at frame t
+    
+    Xdb = librosa.amplitude_to_db(abs(X)) # this converts an amplitude spectrogram
+    # to a dB-scaled spectrogram (``S`` measured in dB)
 
-    plt.figure(figsize=(14, 5))
+    plt.figure() # width and hieight in inches
     librosa.display.specshow(Xdb, sr=sr, x_axis='time', y_axis='log')
-    plt.colorbar()
+    plt.colorbar() # Creates a colorbar for a ScalarMappable instance
 
     #Save image file
-    plt.savefig("nraven%s.png" % i)
+    plt.savefig("nraven%s.png" % filename)
 
 main()
