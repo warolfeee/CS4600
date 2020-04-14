@@ -1,5 +1,5 @@
 **STEPS TO CREATE A CNN MODEL FOR RECOGNIZING A SPECIFIC BIRD CALL:**  
-1. **Download the JSON object with the recording information from the xeno-canto[https://xeno-canto.org] API**  
+1. **Download the JSON object with the recording information from the [xeno-canto](#https://xeno-canto.org) API**  
 	- `wget https://www.xeno-canto.org/api/2/recordings?query=northern+raven`  
 	**northern raven can be changed to what ever bird the user would like to use**  
   
