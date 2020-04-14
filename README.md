@@ -12,6 +12,7 @@
   
 2. **Convert the .mp3 audio recordings to .wav files**  
 	- Wav files are easier to work with when converting audio to images so run the following command to convert the files to wav:  `for file in download*; do ffmpeg -i ${file} ./nraven${file##*.}.wav; done`  
+	
 	- Since all the files are named with the format of **download.55**, the previoud command will gather all the download files in the current directory and name them according to their number after the period.  
   
 3. **Covert the .wav files into spectrograms**   
