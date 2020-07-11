@@ -1,7 +1,7 @@
 def ParseBirdId():
     filename = input("")
     fin = open(filename, "r")
-    for line in fin:
+    for line in fin:eeeee
         for i in range(len(line)-5):
             testLine = line[i] + line[i+1] + line[i+2] + line[i+3] + line[i+4] 
             if testLine == "\"id\":":
